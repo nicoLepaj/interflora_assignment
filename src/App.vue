@@ -1,13 +1,40 @@
 <template>
 	<TheHeader />
-	<router-view />
+	<div class="main-container">
+		<TheNav />
+		<router-view />
+	</div>
+	<TheModal :open="modalOpen" @close="closeModal" />
+	<TheSpinner v-if="use_isLoading" />
 </template>
 
 <script>
+import { ref } from 'vue';
+import TheNav from './components/TheNav.vue';
 import TheHeader from './components/TheHeader.vue';
+import TheSpinner from './components/TheSpinner.vue';
+import TheModal from './components/TheModal.vue';
+import useAsteroids from './composables/asteroids.js';
+
 export default {
 	components: {
-		TheHeader
+		TheHeader,
+		TheSpinner,
+		TheNav,
+		TheModal
+	},
+	setup() {
+		const { isLoading: use_isLoading } = useAsteroids();
+		const modalOpen = ref(false);
+		setTimeout(() => {
+			modalOpen.value = false;
+		}, 25000);
+		const closeModal = () => (modalOpen.value = false);
+		return {
+			use_isLoading,
+			modalOpen,
+			closeModal
+		};
 	}
 };
 </script>
@@ -28,6 +55,11 @@ html {
 }
 body {
 	font-family: 'Open Sans', sans-serif;
-  margin: 0;
+	margin: 0;
+}
+
+.main-container {
+	padding: 5% 10%;
+	color: #d4d4d4;
 }
 </style>

@@ -79,11 +79,12 @@ export default {
 .card-info {
 	margin: 30px 0;
 	padding: 15px;
-  width: 40%;
-  min-width: 300px;
+	width: 40%;
+	min-width: 300px;
 	border: 1px solid #707070;
 	border-radius: 8px;
 	background-color: rgba(255, 255, 255, 0.11);
+	position: relative;
 }
 .title {
 	font-size: 1.5rem;
@@ -93,8 +94,18 @@ export default {
 .field {
 	color: #ffecdb;
 }
-
 .field:not(:last-child) {
 	margin-bottom: 6px;
+}
+.fav-button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.fav-button img {
+	fill: green;
+	height: 30px;
+	width: 30px;
 }
 </style>
