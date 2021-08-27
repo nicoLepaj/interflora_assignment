@@ -11,13 +11,15 @@ const state = ref({
 });
 
 const useAsteroids = () => {
-	const getTodayAsteroids = async () => {
+	const getAsteroids = async (datesRange) => {
+		console.log('getting')
 		state.value.isLoading = true;
 		let asteroids = [];
-		const today = moment().format('YYYY-MM-DD');
+		const startDate = moment(datesRange.start).format('YYYY-MM-DD')
+		const endDate = moment(datesRange.end).format('YYYY-MM-DD')
 		try {
 			const res = await axios.get(
-				`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=fmizeQhZg2e9XjDBaK9jcVuB34DhpZbAwh2qfLWC`
+				`https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=fmizeQhZg2e9XjDBaK9jcVuB34DhpZbAwh2qfLWC`
 			);
 
 			const nearEarth = res.data.near_earth_objects;
@@ -34,6 +36,7 @@ const useAsteroids = () => {
 	};
 
 	const formatAsteroids = (asteroids) => {
+		state.value.asteroids = [];
 		asteroids.forEach((item) => {
 			const timeStamp =
 				item.close_approach_data[0].epoch_date_close_approach / 1000;
@@ -54,6 +57,7 @@ const useAsteroids = () => {
 			};
 			state.value.asteroids.push(formattedAsteroid)
 		});
+		console.log('state', state.value.asteroids)
 		setLatestAsteroid();
 	};
 
@@ -73,7 +77,7 @@ const useAsteroids = () => {
 	};
 
 	return {
-		getTodayAsteroids,
+		getAsteroids,
 		objectCount: computed(() => {
 			return state.value.objectCount;
 		}),

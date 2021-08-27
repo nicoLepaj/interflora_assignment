@@ -3,7 +3,15 @@
 		<div v-if="open" class="backdrop" @click="$emit('close')"></div>
 	</transition>
 	<transition name="slide-down">
-		<dialog :class="['modal', minimal ? 'minimal' : 'classic', dark ? 'dark' : 'light']" open v-if="open">
+		<dialog
+			:class="[
+				'modal',
+				minimal ? 'minimal' : 'classic',
+				dark ? 'dark' : 'light'
+			]"
+			open
+			v-if="open"
+		>
 			<slot></slot>
 		</dialog>
 	</transition>
@@ -21,11 +29,11 @@ export default {
 			type: Boolean,
 			default: false
 		},
-    dark: {
-      required: false,
-      type: Boolean,
-      default: false
-    }
+		dark: {
+			required: false,
+			type: Boolean,
+			default: false
+		}
 	},
 	emits: ['close']
 };
@@ -46,10 +54,9 @@ export default {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-  transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	margin: 0;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-	border-radius: 12px;
 	z-index: 100;
 	border: none;
 }
@@ -57,9 +64,11 @@ export default {
 .classic {
 	width: 30rem;
 	padding: 1rem;
+	border-radius: 12px;
 }
 .minimal {
-  padding: 0;
+	padding: 0;
+	border-radius: 6px;
 }
 
 .light {
@@ -67,7 +76,8 @@ export default {
 }
 
 .dark {
-  background-color: #3f3f3f
+	background-color: #3f3f3f;
+	color: #ffffff;
 }
 
 @keyframes slide-down {
@@ -81,10 +91,10 @@ export default {
 	}
 }
 .slide-down-enter-active {
-	animation: slide-down 0.3s ease-out;
+	animation: slide-down 0.2s ease-out;
 }
 .slide-down-leave-active {
-	animation: slide-down 0.3s ease-in reverse;
+	animation: slide-down 0.2s ease-in reverse;
 }
 
 @keyframes opacify {
@@ -97,9 +107,9 @@ export default {
 }
 
 .backdrop-enter-active {
-	animation: opacify 0.3s ease-out;
+	animation: opacify 0.2s ease-out;
 }
 .backdrop-leave-active {
-	animation: opacify 0.3s ease-in reverse;
+	animation: opacify 0.2s ease-in reverse;
 }
 </style>

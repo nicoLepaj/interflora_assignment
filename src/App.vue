@@ -24,9 +24,10 @@ export default {
 		TheModal
 	},
 	setup() {
-		const { getTodayAsteroids: use_getTodayAsteroids, isLoading: use_isLoading } = useAsteroids();
+		const { getAsteroids: use_getAsteroids, isLoading: use_isLoading } = useAsteroids();
 
-		use_getTodayAsteroids();
+		const todayRange = {start: new Date(), end: new Date()}
+		use_getAsteroids(todayRange);
 
 		const modalOpen = ref(false);
 		setTimeout(() => {

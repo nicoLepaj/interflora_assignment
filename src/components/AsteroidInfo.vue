@@ -3,17 +3,14 @@
 		<div class="title">
 			{{ $filters.removeParentheses(asteroid.name) }}
 		</div>
-		<div class="field">
-			Flew by on {{moment.unix(asteroid.approachDate).format('MMMM Mo YYYY')}}
-		</div>
-		<div class="field">
-			Is considered {{ asteroid.hazardStatus }}
-		</div>
+		<div class="field">Flew by on {{ formattedDate }}</div>
+		<div class="field">Is considered {{ asteroid.hazardStatus }}</div>
 	</div>
 </template>
 
 <script>
-import moment from 'moment'
+import { computed } from 'vue';
+import moment from 'moment';
 export default {
 	name: 'AsteroidInfo',
 	props: {
@@ -22,10 +19,13 @@ export default {
 			required: true
 		}
 	},
-	setup() {
+	setup(props) {
+		const formattedDate = computed(() => {
+			return moment.unix(props.asteroid.approachDate).format('MMMM Do YYYY');
+		});
 		return {
-			moment
-		}
+			formattedDate
+		};
 	}
 };
 </script>

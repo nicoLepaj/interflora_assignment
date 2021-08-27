@@ -8,9 +8,14 @@
 			><button class="button" @click="toggleCalendarModal(true)">
 				Open The Calendar
 			</button></span
-		> and select up to seven days, past or future!
+		>
+		and select up to seven days, past or future!
 	</div>
-	<CalendarModal :modalOpen="modalOpen" @close="toggleCalendarModal(false)" />
+	<CalendarModal
+		:modalOpen="modalOpen"
+		@close="toggleCalendarModal(false)"
+		@confirm="getMoreAsteroids"
+	/>
 	<div v-if="!use_isLoading" class="cards-container">
 		<AsteroidInfo
 			v-for="asteroid in use_asteroids"
@@ -33,6 +38,7 @@ export default {
 	},
 	setup() {
 		const {
+			getAsteroids: use_getAsteroids,
 			asteroids: use_asteroids,
 			isLoading: use_isLoading
 		} = useAsteroids();
@@ -42,11 +48,17 @@ export default {
 			modalOpen.value = val;
 		};
 
+		const getMoreAsteroids = (datesRange) => {
+			console.log('here')
+			use_getAsteroids(datesRange)
+		};
+
 		return {
 			use_asteroids,
 			use_isLoading,
 			toggleCalendarModal,
-			modalOpen
+			modalOpen,
+			getMoreAsteroids
 		};
 	}
 };

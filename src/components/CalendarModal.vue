@@ -1,6 +1,11 @@
 <template>
 	<the-modal :open="modalOpen" :dark="true" :minimal="true">
+		<div class="container">
 			<DatePicker v-model="range" is-range is-dark color="orange" />
+			<div class="confirm-container">
+				<div class="full-btn" @click="$emit('confirm', range)">Confirm</div>
+			</div>
+		</div>
 	</the-modal>
 </template>
 
@@ -20,6 +25,7 @@ export default {
 			type: Boolean
 		}
 	},
+	emits: ['confirm'],
 	setup() {
 		const range = ref({
 			start: new Date(),
@@ -35,10 +41,20 @@ export default {
 <style scoped>
 .container {
 	display: flex;
-	flex-direction: row;
-  justify-content: space-between
+	flex-direction: column;
 }
-.calendar-message {
-  margin-left: 12px;
+.full-btn {
+	width: 100%;
+	text-align: center;
+	padding: 6px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+.full-btn:hover {
+	background-color: #535353;
+}
+.confirm-container {
+	overflow: hidden;
+	border-radius: 0 0 6px 6px;
 }
 </style>
