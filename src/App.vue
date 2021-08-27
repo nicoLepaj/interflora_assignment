@@ -10,10 +10,10 @@
 
 <script>
 import { ref } from 'vue';
-import TheNav from './components/TheNav.vue';
-import TheHeader from './components/TheHeader.vue';
-import TheSpinner from './components/TheSpinner.vue';
-import TheModal from './components/TheModal.vue';
+import TheNav from './components/ui/TheNav.vue';
+import TheHeader from './components/ui/TheHeader.vue';
+import TheSpinner from './components/ui/TheSpinner.vue';
+import TheModal from './components/ui/TheModal.vue';
 import useAsteroids from './composables/asteroids.js';
 
 export default {
@@ -24,12 +24,16 @@ export default {
 		TheModal
 	},
 	setup() {
-		const { isLoading: use_isLoading } = useAsteroids();
+		const { getTodayAsteroids: use_getTodayAsteroids, isLoading: use_isLoading } = useAsteroids();
+
+		use_getTodayAsteroids();
+
 		const modalOpen = ref(false);
 		setTimeout(() => {
 			modalOpen.value = false;
 		}, 25000);
 		const closeModal = () => (modalOpen.value = false);
+		
 		return {
 			use_isLoading,
 			modalOpen,
@@ -59,7 +63,7 @@ body {
 }
 
 .main-container {
-	padding: 5% 10%;
+	padding: 5%;
 	color: #d4d4d4;
 }
 </style>

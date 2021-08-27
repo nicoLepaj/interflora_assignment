@@ -38,7 +38,7 @@
 			<div class="field">
 				{{
 					$filters.upperCase(
-						`nasa classified this object as ${use_latestAsteroid.hazardStatus}`
+						`is considered ${use_latestAsteroid.hazardStatus} by nasa`
 					)
 				}}
 			</div>
@@ -51,12 +51,9 @@ import useAsteroids from '../composables/asteroids.js';
 export default {
 	setup() {
 		const {
-			getTodayAsteroids: use_getTodayAsteroids,
 			latestAsteroid: use_latestAsteroid,
 			isLoading: use_isLoading
 		} = useAsteroids();
-
-		use_getTodayAsteroids();
 
 		return {
 			use_latestAsteroid,

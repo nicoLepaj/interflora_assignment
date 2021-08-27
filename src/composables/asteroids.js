@@ -34,7 +34,6 @@ const useAsteroids = () => {
 	};
 
 	const formatAsteroids = (asteroids) => {
-		console.log('original', asteroids);
 		asteroids.forEach((item) => {
 			const timeStamp =
 				item.close_approach_data[0].epoch_date_close_approach / 1000;

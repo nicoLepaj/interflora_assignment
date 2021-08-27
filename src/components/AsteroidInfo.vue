@@ -1,22 +1,19 @@
 <template>
 	<div class="card-info">
 		<div class="title">
-			{{ $filters.upperCase('asteroid') }}
 			{{ $filters.removeParentheses(asteroid.name) }}
 		</div>
 		<div class="field">
-			Diameter:
-			{{ asteroid.diameter }}
+			Flew by on {{moment.unix(asteroid.approachDate).format('MMMM Mo YYYY')}}
 		</div>
-		<div class="field">Classified by NASA as {{ asteroid.hazardStatus }}</div>
 		<div class="field">
-			Is orbiting around {{ asteroid.orbit }} at a speed of {{ asteroid.velocity }} Km/h
+			Is considered {{ asteroid.hazardStatus }}
 		</div>
-		<div class="field">Flew by at a distance of {{ asteroid.missDistance }} AU</div>
 	</div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
 	name: 'AsteroidInfo',
 	props: {
@@ -24,28 +21,36 @@ export default {
 			type: Object,
 			required: true
 		}
+	},
+	setup() {
+		return {
+			moment
+		}
 	}
 };
 </script>
 
 <style scoped>
 .card-info {
-	margin: 30px 0;
+	margin: 20px 0;
 	padding: 15px;
-	width: 40%;
-	min-width: 300px;
+	width: 250px;
 	border: 1px solid #707070;
 	border-radius: 8px;
-	background-color: rgba(255, 255, 255, 0.11);
+	background-color: #a79f8ccc;
 	position: relative;
+	margin-right: 20px;
+	cursor: pointer;
 }
 .title {
 	font-size: 1.5rem;
+	font-weight: 700;
 	margin-bottom: 8px;
-	color: #ffb184;
+	color: #161616;
 }
 .field {
-	color: #ffecdb;
+	color: #ffffff;
+	font-weight: 600;
 }
 .field:not(:last-child) {
 	margin-bottom: 6px;
