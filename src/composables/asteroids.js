@@ -6,17 +6,15 @@ const state = ref({
 	isLoading: false,
 	objectCount: null,
 	asteroids: [],
-	latest: null,
-	tracked: []
+	latest: null
 });
 
 const useAsteroids = () => {
 	const getAsteroids = async (datesRange) => {
-		console.log('getting')
 		state.value.isLoading = true;
 		let asteroids = [];
-		const startDate = moment(datesRange.start).format('YYYY-MM-DD')
-		const endDate = moment(datesRange.end).format('YYYY-MM-DD')
+		const startDate = moment(datesRange.start).format('YYYY-MM-DD');
+		const endDate = moment(datesRange.end).format('YYYY-MM-DD');
 		try {
 			const res = await axios.get(
 				`https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=fmizeQhZg2e9XjDBaK9jcVuB34DhpZbAwh2qfLWC`
@@ -29,6 +27,7 @@ const useAsteroids = () => {
 
 			state.value.objectCount = state.value.asteroids.length;
 		} catch (error) {
+			state.value.isLoading = false;
 			throw new Error(error.message);
 		}
 
@@ -51,14 +50,22 @@ const useAsteroids = () => {
 				velocity: parseFloat(
 					item.close_approach_data[0].relative_velocity.kilometers_per_second
 				).toFixed(1),
-				diameter: item.estimated_diameter.meters.estimated_diameter_max.toFixed(0),
-				missDistance: parseFloat(item.close_approach_data[0].miss_distance.astronomical).toFixed(2),
+				diameter: item.estimated_diameter.meters.estimated_diameter_max.toFixed(
+					0
+				),
+				missDistance: parseFloat(
+					item.close_approach_data[0].miss_distance.astronomical
+				).toFixed(2),
 				approachDate: timeStamp
 			};
-			state.value.asteroids.push(formattedAsteroid)
+
+			state.value.asteroids.push(formattedAsteroid);
 		});
-		console.log('state', state.value.asteroids)
-		setLatestAsteroid();
+
+		if (!state.value.latest) {
+			setLatestAsteroid();
+		}
+		state.value.isLoading = false;
 	};
 
 	const setLatestAsteroid = () => {
@@ -73,7 +80,6 @@ const useAsteroids = () => {
 		});
 
 		state.value.latest = latestAsteroid;
-		state.value.isLoading = false;
 	};
 
 	return {

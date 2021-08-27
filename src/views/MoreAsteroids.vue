@@ -49,7 +49,6 @@ export default {
 		};
 
 		const getMoreAsteroids = (datesRange) => {
-			console.log('here')
 			use_getAsteroids(datesRange)
 		};
 

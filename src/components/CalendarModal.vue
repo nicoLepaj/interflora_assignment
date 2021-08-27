@@ -3,16 +3,17 @@
 		<div class="container">
 			<DatePicker v-model="range" is-range is-dark color="orange" />
 			<div class="confirm-container">
-				<div class="full-btn" @click="$emit('confirm', range)">Confirm</div>
+				<div class="full-btn" @click="confirmRange">{{message}}</div>
 			</div>
 		</div>
 	</the-modal>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import TheModal from '../components/ui/TheModal.vue';
 import { DatePicker } from 'v-calendar';
+import moment from 'moment';
 
 export default {
 	components: {
@@ -26,13 +27,33 @@ export default {
 		}
 	},
 	emits: ['confirm'],
-	setup() {
+	setup(_props, context) {
 		const range = ref({
 			start: new Date(),
 			end: new Date()
 		});
+
+    const message = ref('Confirm')
+
+    watch(range, () => {
+      message.value = 'Confirm'
+    })
+
+		const confirmRange = () => {
+			const daysNumber =
+				Math.abs(
+					moment(range.value.start).diff(moment(range.value.end), 'days')
+				) + 1;
+			if (daysNumber <= 7) {
+				context.emit('confirm', range.value);
+			} else {
+        message.value = 'Range must be 7 days or less'
+      }
+		};
 		return {
-			range
+			range,
+			confirmRange,
+      message
 		};
 	}
 };
