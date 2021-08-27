@@ -55,10 +55,4 @@ export default {
 	bottom: 0;
 	right: 0;
 }
-
-.fav-button img {
-	fill: green;
-	height: 30px;
-	width: 30px;
-}
 </style>
