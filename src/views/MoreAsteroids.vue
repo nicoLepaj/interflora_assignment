@@ -9,7 +9,6 @@
 </template>
 
 <script>
-//import { onMounted } from 'vue';
 import AsteroidInfo from '../components/AsteroidInfo.vue';
 import useAsteroids from '@/composables/asteroids';
 export default {
@@ -19,15 +18,12 @@ export default {
 	},
 	setup() {
 		const {
-			//getTodayAsteroids: use_getTodayAsteroids,
-			//objectCount: use_objectCount,
 			asteroids: use_asteroids,
 			isLoading: use_isLoading
 		} = useAsteroids();
 
 		return {
 			use_asteroids,
-			//use_objectCount,
 			use_isLoading
 		};
 	}

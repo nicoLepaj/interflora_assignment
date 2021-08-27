@@ -2,22 +2,21 @@
 	<div class="card-info">
 		<div class="title">
 			{{ $filters.upperCase('asteroid') }}
-			{{ $filters.removeParentheses(name) }}
+			{{ $filters.removeParentheses(asteroid.name) }}
 		</div>
 		<div class="field">
 			Diameter:
-			{{ averageDiameter }}
+			{{ asteroid.diameter }}
 		</div>
-		<div class="field">Classified by NASA as {{ hazardStatus }}</div>
+		<div class="field">Classified by NASA as {{ asteroid.hazardStatus }}</div>
 		<div class="field">
-			Is orbiting around {{ orbit }} at a speed of {{ velocity }} Km/h
+			Is orbiting around {{ asteroid.orbit }} at a speed of {{ asteroid.velocity }} Km/h
 		</div>
-		<div class="field">Flew by at a distance of {{ missDistance }} AU</div>
+		<div class="field">Flew by at a distance of {{ asteroid.missDistance }} AU</div>
 	</div>
 </template>
 
 <script>
-import { computed } from 'vue';
 export default {
 	name: 'AsteroidInfo',
 	props: {
@@ -25,52 +24,6 @@ export default {
 			type: Object,
 			required: true
 		}
-	},
-	setup(props) {
-		const name = computed(() => {
-			return props.asteroid.name;
-		});
-
-		const averageDiameter = computed(() => {
-			return (
-				(
-					(props.asteroid.estimated_diameter.meters.estimated_diameter_max +
-						props.asteroid.estimated_diameter.meters.estimated_diameter_min) /
-					2
-				).toFixed(0) + ' m'
-			);
-		});
-
-		const hazardStatus = computed(() => {
-			return props.asteroid.is_potentially_hazardous_asteroid
-				? 'hazardous'
-				: 'not hazardous';
-		});
-
-		const orbit = computed(() => {
-			return props.asteroid.close_approach_data[0].orbiting_body;
-		});
-
-		const missDistance = computed(() => {
-			const au = +props.asteroid.close_approach_data[0].miss_distance
-				.astronomical;
-			return au.toFixed(2);
-		});
-
-		const velocity = computed(() => {
-			let speed = +props.asteroid.close_approach_data[0].relative_velocity
-				.kilometers_per_hour;
-			speed = speed.toFixed(0);
-			return speed;
-		});
-		return {
-			name,
-			averageDiameter,
-			hazardStatus,
-			orbit,
-			missDistance,
-			velocity
-		};
 	}
 };
 </script>
