@@ -1,5 +1,14 @@
+<template>
+	<div id="stars-container">
+		<div id="stars" />
+		<div id="stars2" />
+		<div id="stars3" />
+	</div>
+</template>
+
+<style scoped>
 #stars-container {
-	z-index: -1;
+	z-index: -2;
 	position: fixed;
 	top: 0;
 }
@@ -732,3 +741,5 @@
 		transform: translateY(-2000px);
 	}
 }
+
+</style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="card-info">
+	<div class="card">
 		<div class="title">
 			{{ $filters.removeParentheses(asteroid.name) }}
 		</div>
@@ -30,26 +30,25 @@ export default {
 </script>
 
 <style scoped>
-.card-info {
+.card {
 	margin: 20px 0;
 	padding: 15px;
 	width: 300px;
-	border: 1px solid #707070;
 	border-radius: 8px;
-	background-color: #a79f8ccc;
+	background-color: #1B202A;
 	position: relative;
 	margin-right: 20px;
 	cursor: pointer;
+	box-shadow: 0px 11px 9px -8px #0f0f0f;
 }
 .title {
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin-bottom: 8px;
-	color: #161616;
 }
 .field {
-	color: #ffffff;
-	font-weight: 600;
+	font-size: 0.9rem;
+	color: #b8b6c0;
 }
 .field:not(:last-child) {
 	margin-bottom: 6px;
@@ -61,11 +60,11 @@ export default {
 }
 
 @media (max-width: 600px) {
-	.card-info {
+	.card {
 		width: 100%;
 		margin: 10px 0;
 	}
-	.card-info:first-child {
+	.card:first-child {
 		margin-top: 20px;
 	}
 }

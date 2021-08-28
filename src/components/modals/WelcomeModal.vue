@@ -1,6 +1,6 @@
 <template>
 	<the-modal :open="modalOpen">
-		<img src="../../assets/planet.svg" />
+		<img src="@/assets/satellite.png" />
 		<div class="title">Welcome to the Asteroid Tracker</div>
 		<div class="sub-title">
 			Find out about the latest asteroid to cross our path
@@ -9,16 +9,6 @@
 			Or explore more dates in the More Asteroids page
 		</div>
 		<button class="button" @click="$emit('close')">Got it!</button>
-		<div class="extra-info">
-			Image made by
-			<a
-				href="https://www.flaticon.com/authors/smalllikeart"
-				title="smalllikeart"
-				>smalllikeart</a
-			>
-			from
-			<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-		</div>
 	</the-modal>
 </template>
 
@@ -39,30 +29,23 @@ export default {
 
 <style scoped>
 .title {
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-weight: 600;
-	margin-bottom: 20px;
+	margin: 20px 0;
 }
 
 .sub-title {
-	font-size: 1.5rem;
-	font-weight: 400;
-}
-.button {
-	padding: 8px 30px;
 	font-size: 1.2rem;
-	margin-top: 20px;
+	color: #b8b6c0;
 }
+
 img {
-	height: 150px;
+	height: 110px;
 }
-.extra-info {
-  margin-top: 12px;
-  font-size: 0.8rem;
-  color: #cecece
-}
-.extra-info a {
-  color: inherit;
+
+.button {
+	margin-top: 30px;
+	width: 150px;
 }
 
 @media (max-width: 600px) {

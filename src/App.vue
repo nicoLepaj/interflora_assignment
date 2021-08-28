@@ -1,24 +1,21 @@
 <template>
-	<div id="background">
-		<img src="@/assets/blood-moon.png" alt="moon-background" />
-	</div>
-	<div id="stars-container">
-		<div id="stars" />
-		<div id="stars2" />
-		<div id="stars3" />
-	</div>
 	<div class="main-container">
 		<TheHeader v-if="!initialLoading" />
 		<router-view />
 	</div>
 	<WelcomeModal :modalOpen="modalOpen" @close="closeModal" />
 	<TheSpinner v-if="use_isLoading" />
+	<div id="background">
+		<img src="@/assets/blood-moon.png" alt="moon-background" />
+	</div>
+	<Stars />
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
 import TheHeader from '@/components/ui/TheHeader.vue';
 import TheSpinner from '@/components/ui/TheSpinner.vue';
+import Stars from '@/components/ui/Stars.vue';
 import WelcomeModal from '@/components/modals/WelcomeModal.vue';
 import useAsteroids from '@/composables/asteroids.js';
 import moment from 'moment';
@@ -27,6 +24,7 @@ export default {
 	components: {
 		TheHeader,
 		TheSpinner,
+		Stars,
 		WelcomeModal
 	},
 	setup() {
@@ -43,8 +41,8 @@ export default {
 			await use_getAsteroids(todayRange);
 			initialLoading.value = false;
 			setTimeout(() => {
-				modalOpen.value = false;
-			}, 25000);
+				modalOpen.value = true;
+			}, 250);
 		});
 
 		const closeModal = () => (modalOpen.value = false);
@@ -61,7 +59,6 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-@import './components/ui/stars/Stars.css';
 * {
 	box-sizing: border-box;
 }
@@ -69,7 +66,7 @@ export default {
 body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
-	background: #000;
+	background: #151a22;
 }
 #background img {
 	position: fixed;
@@ -77,26 +74,37 @@ body {
 	right: 100px;
 	width: 450px;
 	height: auto;
+	z-index: -1;
 }
 .main-container {
 	padding: 5%;
-	color: #d4d4d4;
+	color: #fff;
 }
 
 .button {
-	background-color: rgba(221, 221, 221, 0);
-	border: 1px solid #cecece;
-	color: inherit;
-	padding: 5px 10px;
+	background-color: #f3d23f;
+	border: none;
+	color: #36393f;
+	padding: 8px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	margin: 4px 2px;
+	margin-right: 20px;
 	cursor: pointer;
-	border-radius: 16px;
-	transition: background-color 0.2s;
+	border-radius: 20px;
+	transition: all 0.2s;
+	font-weight: 700;
+	font-size: 1.02rem;
 }
 .button:hover {
-	background-color: #535353;
+	transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+	#background img {
+		top: 400px;
+		right: -50px;
+		width: 200px;
+	}
 }
 </style>

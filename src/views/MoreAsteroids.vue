@@ -1,21 +1,20 @@
 <template>
-	<div class="message">
-		<div>
-			The default list consists of the asteroids that passsed us today and
-			yesterday
-		</div>
-		<div>
-			To select other dates
-			<span
-				><button class="button" @click="toggleCalendarModal(true)">
-					Open The Calendar
-				</button></span
-			>
-			and select up to seven days, past or future!
-		</div>
-	</div>
-
 	<div v-if="!use_isLoading" class="cards-container">
+		<div class="message">
+			<div>
+				<div>
+					The default list consists of the asteroids that passsed us today and
+					yesterday
+				</div>
+				<div class="message-bottom">
+					To select other dates open the calendar and select up to seven days,
+					past or future!
+				</div>
+			</div>
+			<button class="button" @click="toggleCalendarModal(true)">
+				Open Calendar
+			</button>
+		</div>
 		<AsteroidCard
 			v-for="asteroid in use_asteroids"
 			:asteroid="asteroid"
@@ -80,11 +79,31 @@ export default {
 </script>
 
 <style scoped>
+.message {
+	margin-top: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
 .cards-container {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: start;
-	max-width: 1000px;
+	max-width: 960px;
+}
+
+@media (max-width: 600px) {
+	.message {
+		flex-direction: column;
+	}
+	.button {
+		margin: 20px 0 12px;
+	}
+	.message-bottom {
+		margin-top: 12px;
+	}
 }
 </style>

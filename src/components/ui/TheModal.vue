@@ -51,15 +51,14 @@ export default {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	box-shadow: 0px 11px 9px -8px #0f0f0f;
 	z-index: 100;
 	border: none;
 }
-
 .classic {
 	width: 40rem;
 	text-align: center;
-	padding: 1rem;
+	padding: 2rem;
 	border-radius: 12px;
 }
 .minimal {
@@ -68,7 +67,7 @@ export default {
 }
 
 .dark {
-	background-color: #3f3f3f;
+	background-color: #1B202A;
 	color: #ffffff;
 }
 

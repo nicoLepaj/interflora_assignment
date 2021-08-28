@@ -19,7 +19,7 @@
 
 a {
 	text-decoration: none;
-	color: #999999;
+	color: #949497;
 }
 
 a:last-child {
@@ -33,6 +33,7 @@ a.router-link-active {
 @media (max-width: 600px) {
 	.selectors h1 {
 		margin-top: 0;
+		font-size: 1.2rem;
 	}
 }
 </style>
