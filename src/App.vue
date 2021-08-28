@@ -1,42 +1,53 @@
 <template>
 	<TheHeader />
 	<div class="main-container">
-		<TheNav />
+		<TheNav v-if="!initialLoading" />
 		<router-view />
 	</div>
-	<TheModal :open="modalOpen" @close="closeModal" />
+	<WelcomeModal :modalOpen="modalOpen" @close="closeModal" :dark="true" />
 	<TheSpinner v-if="use_isLoading" />
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import TheNav from './components/ui/TheNav.vue';
 import TheHeader from './components/ui/TheHeader.vue';
 import TheSpinner from './components/ui/TheSpinner.vue';
-import TheModal from './components/ui/TheModal.vue';
+import WelcomeModal from './components/WelcomeModal.vue';
 import useAsteroids from './composables/asteroids.js';
+import moment from 'moment';
 
 export default {
 	components: {
 		TheHeader,
 		TheSpinner,
 		TheNav,
-		TheModal
+		WelcomeModal
 	},
 	setup() {
-		const { getAsteroids: use_getAsteroids, isLoading: use_isLoading } = useAsteroids();
+		const {
+			getAsteroids: use_getAsteroids,
+			isLoading: use_isLoading
+		} = useAsteroids();
 
-		const todayRange = {start: new Date(), end: new Date()}
-		use_getAsteroids(todayRange);
-
+		const todayRange = { start: moment(), end: moment().add(-1, 'days') };
+		const initialLoading = ref(true)
 		const modalOpen = ref(false);
-		setTimeout(() => {
-			modalOpen.value = false;
+
+		onMounted(async () => {
+			await use_getAsteroids(todayRange);
+			initialLoading.value = false;
+
+			setTimeout(() => {
+			modalOpen.value = true;
 		}, 25000);
-		const closeModal = () => (modalOpen.value = false);
+		});
 		
+		const closeModal = () => (modalOpen.value = false);
+
 		return {
 			use_isLoading,
+			initialLoading,
 			modalOpen,
 			closeModal
 		};
@@ -51,20 +62,35 @@ export default {
 	box-sizing: border-box;
 }
 
-html {
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
 	background: url('./assets/red-mooon.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 }
-body {
-	font-family: 'Open Sans', sans-serif;
-	margin: 0;
-}
 
 .main-container {
 	padding: 5%;
 	color: #d4d4d4;
+}
+
+.button {
+	background-color: rgba(221, 221, 221, 0);
+	border: 1px solid #cecece;
+	color: inherit;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 16px;
+	transition: background-color 0.2s;
+}
+.button:hover {
+	background-color: #535353;
 }
 </style>

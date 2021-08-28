@@ -1,6 +1,6 @@
 <template>
 	<div>
-		The default list consists of the asteroids that passsed us today
+		The default list consists of the asteroids that passsed us today and yesterday
 	</div>
 	<div>
 		To select other dates
@@ -49,7 +49,8 @@ export default {
 		};
 
 		const getMoreAsteroids = (datesRange) => {
-			use_getAsteroids(datesRange)
+			toggleCalendarModal(false);
+			use_getAsteroids(datesRange);
 		};
 
 		return {
@@ -70,18 +71,5 @@ export default {
 	flex-wrap: wrap;
 	justify-content: start;
 	max-width: 825px;
-}
-
-.button {
-	background-color: rgba(221, 221, 221, 0);
-	border: 1px solid #cecece;
-	color: inherit;
-	padding: 5px 10px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	margin: 4px 2px;
-	cursor: pointer;
-	border-radius: 16px;
 }
 </style>

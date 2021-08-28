@@ -62,7 +62,8 @@ export default {
 }
 
 .classic {
-	width: 30rem;
+	width: 40rem;
+	text-align: center;
 	padding: 1rem;
 	border-radius: 12px;
 }
