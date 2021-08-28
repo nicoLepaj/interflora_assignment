@@ -40,7 +40,7 @@ export default {
 
 			setTimeout(() => {
 			modalOpen.value = true;
-		}, 1000);
+		}, 25000);
 		});
 		
 		const closeModal = () => (modalOpen.value = false);
