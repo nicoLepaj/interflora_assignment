@@ -6,7 +6,7 @@ const state = ref({
 	isLoading: false,
 	objectCount: null,
 	asteroids: [],
-	latestId: null
+	latest: null
 });
 
 const useAsteroids = () => {
@@ -63,7 +63,7 @@ const useAsteroids = () => {
 			state.value.asteroids.push(formattedAsteroid);
 		});
 
-		if (!state.value.latestId) {
+		if (!state.value.latest) {
 			setLatestAsteroid();
 		}
 		state.value.isLoading = false;
@@ -71,16 +71,16 @@ const useAsteroids = () => {
 
 	const setLatestAsteroid = () => {
 		let latestDate = 0;
-		let latestAsteroidId;
+		let latestAsteroid;
 		const now = moment().unix();
 		state.value.asteroids.forEach((item) => {
 			if (item.approachDate > latestDate && item.approachDate < now) {
 				latestDate = item.approachDate;
-				latestAsteroidId = item.id;
+				latestAsteroid = item;
 			}
 		});
 
-		state.value.latestId = latestAsteroidId;
+		state.value.latest = latestAsteroid;
 	};
 
 	return {
@@ -91,8 +91,8 @@ const useAsteroids = () => {
 		asteroids: computed(() => {
 			return state.value.asteroids;
 		}),
-		latestAsteroidId: computed(() => {
-			return state.value.latestId;
+		latestAsteroid: computed(() => {
+			return state.value.latest;
 		}),
 		isLoading: computed(() => {
 			return state.value.isLoading;

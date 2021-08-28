@@ -48,15 +48,25 @@ import useAsteroids from '../composables/asteroids';
 export default {
 	props: {
 		asteroidId: {
-			required: true,
+			required: false,
 			type: String
 		}
 	},
 	setup(props) {
-		const { asteroids: use_asteroids } = useAsteroids();
-		const asteroid = ref(
-			use_asteroids.value.find((item) => item.id === props.asteroidId)
-		);
+		const {
+			asteroids: use_asteroids,
+			latestAsteroid: use_latestAsteroid
+		} = useAsteroids();
+		
+		const asteroid = ref(null);
+
+		if (!props.asteroidId) {
+			asteroid.value = use_latestAsteroid.value;
+		} else {
+			asteroid.value = use_asteroids.value.find(
+				(item) => item.id === props.asteroidId
+			);
+		}
 
 		return {
 			asteroid

@@ -8,9 +8,6 @@ app.config.globalProperties.$filters = {
 	upperCase(string) {
 		return string.toUpperCase();
 	},
-	/* capitalize(string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}, */
 	removeParentheses(string) {
 		return string.replace(/[()]/g, '');
 	}

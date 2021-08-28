@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!use_isLoading">
-		<SingleAsteroid :asteroidId="use_latestAsteroidId"/>
+		<SingleAsteroid/>
 	</div>
 </template>
 
@@ -13,12 +13,10 @@ export default {
 	},
 	setup() {
 		const {
-			latestAsteroidId: use_latestAsteroidId,
 			isLoading: use_isLoading
 		} = useAsteroids();
 
 		return {
-			use_latestAsteroidId,
 			use_isLoading
 		};
 	}
