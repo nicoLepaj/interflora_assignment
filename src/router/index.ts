@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
 import LatestAsteroid from '../views/LatestAsteroid.vue';
 import MoreAsteroids from '../views/MoreAsteroids.vue';
 import SingleAsteroid from '../components/SingleAsteroid.vue';

@@ -30,16 +30,18 @@
 	/>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+import moment from 'moment';
 
 import AsteroidCard from '@/components/AsteroidCard.vue';
 import CalendarModal from '@/components/modals/CalendarModal.vue';
 
 import useAsteroids from '@/composables/asteroids';
 
-export default {
+export default defineComponent({
 	components: {
 		AsteroidCard,
 		CalendarModal
@@ -52,17 +54,17 @@ export default {
 		} = useAsteroids();
 
 		const calendarModalOpen = ref(false);
-		const toggleCalendarModal = (val) => {
+		const toggleCalendarModal = (val: boolean) => {
 			calendarModalOpen.value = val;
 		};
 
-		const getMoreAsteroids = (datesRange) => {
+		const getMoreAsteroids = (datesRange: {start: moment.Moment, end: moment.Moment}) => {
 			toggleCalendarModal(false);
 			use_getAsteroids(datesRange);
 		};
 
 		const router = useRouter();
-		const showDetails = (id) => {
+		const showDetails = (id: string) => {
 			router.replace({
 				name: 'details',
 				params: { asteroidId: id }
@@ -78,7 +80,7 @@ export default {
 			showDetails
 		};
 	}
-};
+});
 </script>
 
 <style scoped>

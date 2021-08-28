@@ -1,53 +1,41 @@
 <template>
 	<div class="container">
 		<div class="title">
-			{{ $filters.upperCase('asteroid') }}
+			asteroid
 			{{ $filters.removeParentheses(asteroid.name) }}
 		</div>
 		<div class="block">
 			<div class="field">
-				{{
-					$filters.upperCase(
-						`flew by on ${asteroid.flyDate} at ${asteroid.flyTime}`
-					)
-				}}
+				{{ `flew by on ${asteroid.flyDate} at ${asteroid.flyTime}` }}
 			</div>
 			<div class="field">
-				{{
-					$filters.upperCase(
-						`passed ${asteroid.missDistance} au away from earth`
-					)
-				}}
+				{{ `passed ${asteroid.missDistance} au away from earth` }}
 			</div>
 		</div>
 		<div class="block">
 			<div class="field">
-				{{
-					$filters.upperCase(
-						`orbits the ${asteroid.orbit} at ${asteroid.velocity} km/s`
-					)
-				}}
+				{{ `orbits the ${asteroid.orbit} at ${asteroid.velocity} km/s` }}
 			</div>
 			<div class="field">
-				{{ $filters.upperCase(`is ${asteroid.diameter} meters wide`) }}
+				{{ `is ${asteroid.diameter} meters wide` }}
 			</div>
 		</div>
 		<div class="block">
 			<div class="field">
-				{{
-					$filters.upperCase(`is considered ${asteroid.hazardStatus} by nasa`)
-				}}
+				{{ `is considered ${asteroid.hazardStatus} by nasa` }}
 			</div>
 		</div>
 	</div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
 import useAsteroids from '@/composables/asteroids';
 
-export default {
+import Asteroid from '@/interfaces/Asteroid';
+
+export default defineComponent({
 	props: {
 		asteroidId: {
 			required: false,
@@ -60,7 +48,7 @@ export default {
 			latestAsteroid: use_latestAsteroid
 		} = useAsteroids();
 
-		const asteroid = ref(null);
+		const asteroid = ref<Asteroid>();
 
 		if (!props.asteroidId) {
 			asteroid.value = use_latestAsteroid.value;
@@ -74,12 +62,13 @@ export default {
 			asteroid
 		};
 	}
-};
+});
 </script>
 
 <style scoped>
 .container {
 	margin-top: 80px;
+	text-transform: uppercase;
 }
 .block {
 	margin-top: 20px;

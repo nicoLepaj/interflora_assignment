@@ -1,10 +1,10 @@
 <template>
 	<div class="selectors">
 		<router-link to="/">
-			<h1>{{ $filters.upperCase('latest asteroid') }}</h1>
+			<h1>latest asteroid</h1>
 		</router-link>
 		<router-link to="/more">
-			<h1>{{ $filters.upperCase('more asteroids') }}</h1>
+			<h1>more asteroids</h1>
 		</router-link>
 	</div>
 </template>
@@ -15,6 +15,7 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-start;
+	text-transform: uppercase;
 }
 
 a {

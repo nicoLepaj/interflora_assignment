@@ -3,22 +3,33 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 import moment from 'moment';
 
-const state = ref({
+import Asteroid from '@/interfaces/Asteroid';
+
+const state = ref<{
+	isLoading: boolean;
+	asteroids: Asteroid[];
+	latest: Asteroid;
+}>({
 	isLoading: false,
 	asteroids: [],
-	latest: null
+	latest: {} as Asteroid
 });
 
 const useAsteroids = () => {
-	const getAsteroids = async (datesRange) => {
+	const getAsteroids = async (datesRange: {
+		start: moment.Moment;
+		end: moment.Moment;
+	}) => {
 		state.value.isLoading = true;
 		state.value.asteroids = [];
-		let asteroids = [];
+		const asteroids: any[] = [];
 		const startDate = moment(datesRange.start).format('YYYY-MM-DD');
 		const endDate = moment(datesRange.end).format('YYYY-MM-DD');
+		const BASE_URL = 'https://api.nasa.gov/neo/rest/v1/feed';
+
 		try {
 			const res = await axios.get(
-				`https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=fmizeQhZg2e9XjDBaK9jcVuB34DhpZbAwh2qfLWC`
+				`${BASE_URL}?start_date=${startDate}&end_date=${endDate}&api_key=${process.env.VUE_APP_API_KEY}`
 			);
 
 			const nearEarth = res.data.near_earth_objects;
@@ -33,11 +44,11 @@ const useAsteroids = () => {
 		formatAsteroids(asteroids);
 	};
 
-	const formatAsteroids = (asteroids) => {
+	const formatAsteroids = (asteroids: any[]) => {
 		asteroids.forEach((item) => {
 			const timeStamp =
 				item.close_approach_data[0].epoch_date_close_approach / 1000;
-			const formattedAsteroid = {
+			const formattedAsteroid: Asteroid = {
 				id: item.id,
 				name: item.name,
 				hazardStatus: item.is_potentially_hazardous_asteroid
@@ -61,7 +72,7 @@ const useAsteroids = () => {
 			state.value.asteroids.push(formattedAsteroid);
 		});
 
-		if (!state.value.latest) {
+		if (Object.keys(state.value.latest).length === 0) {
 			setLatestAsteroid();
 		}
 		state.value.isLoading = false;
@@ -69,7 +80,7 @@ const useAsteroids = () => {
 
 	const setLatestAsteroid = () => {
 		let latestDate = 0;
-		let latestAsteroid;
+		let latestAsteroid: Asteroid | undefined;
 		const now = moment().unix();
 		state.value.asteroids.forEach((item) => {
 			if (item.approachDate > latestDate && item.approachDate < now) {
@@ -78,7 +89,9 @@ const useAsteroids = () => {
 			}
 		});
 
-		state.value.latest = latestAsteroid;
+		if (latestAsteroid) {
+			state.value.latest = latestAsteroid;
+		}
 	};
 
 	return {

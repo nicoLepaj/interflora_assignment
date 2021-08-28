@@ -8,15 +8,17 @@
 	</div>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script lang="ts">
+import { computed, defineComponent, PropType } from 'vue';
 
 import moment from 'moment';
 
-export default {
+import Asteroid from '@/interfaces/Asteroid'
+
+export default defineComponent({
 	props: {
 		asteroid: {
-			type: Object,
+			type: Object as PropType<Asteroid>,
 			required: true
 		}
 	},
@@ -28,7 +30,7 @@ export default {
 			formattedDate
 		};
 	}
-};
+});
 </script>
 
 <style scoped>

@@ -11,8 +11,8 @@
 	<Stars />
 </template>
 
-<script>
-import { ref, onMounted } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
 
 import moment from 'moment';
 
@@ -20,9 +20,9 @@ import TheHeader from '@/components/ui/TheHeader.vue';
 import TheSpinner from '@/components/ui/TheSpinner.vue';
 import Stars from '@/components/ui/Stars.vue';
 import WelcomeModal from '@/components/modals/WelcomeModal.vue';
-import useAsteroids from '@/composables/asteroids.js';
+import useAsteroids from '@/composables/asteroids';
 
-export default {
+export default defineComponent({
 	components: {
 		TheHeader,
 		TheSpinner,
@@ -44,7 +44,7 @@ export default {
 			initialLoading.value = false;
 			setTimeout(() => {
 				modalOpen.value = true;
-			}, 250);
+			}, 25000);
 		});
 
 		const closeModal = () => (modalOpen.value = false);
@@ -56,7 +56,7 @@ export default {
 			initialLoading
 		};
 	}
-};
+});
 </script>
 
 <style>
