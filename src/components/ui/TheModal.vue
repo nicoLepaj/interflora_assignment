@@ -113,4 +113,10 @@ export default {
 .backdrop-leave-active {
 	animation: opacify 0.2s ease-in reverse;
 }
+
+@media (max-width: 600px) {
+	.classic {
+		width: 90%;
+	}
+}
 </style>

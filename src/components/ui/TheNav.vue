@@ -33,4 +33,13 @@ a:last-child {
 a.router-link-active {
   color: inherit;
 }
+
+@media (max-width: 600px) {
+	.selectors {
+		top: 6px;
+	}
+	.selectors h1 {
+		margin-top: 0;
+	}
+}
 </style>

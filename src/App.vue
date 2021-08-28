@@ -39,8 +39,8 @@ export default {
 			initialLoading.value = false;
 
 			setTimeout(() => {
-			modalOpen.value = false;
-		}, 25000);
+			modalOpen.value = true;
+		}, 1000);
 		});
 		
 		const closeModal = () => (modalOpen.value = false);

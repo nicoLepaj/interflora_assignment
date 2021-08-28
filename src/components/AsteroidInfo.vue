@@ -60,4 +60,14 @@ export default {
 	bottom: 0;
 	right: 0;
 }
+
+@media (max-width: 600px) {
+	.card-info {
+		width: 100%;
+		margin: 10px 0;
+	}
+.card-info:first-child {
+	margin-top: 20px;
+}
+}
 </style>

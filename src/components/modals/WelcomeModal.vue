@@ -64,4 +64,10 @@ img {
 .extra-info a {
   color: inherit;
 }
+
+@media (max-width: 600px) {
+	.sub-title {
+		font-size: 1.5rem;
+	}
+}
 </style>

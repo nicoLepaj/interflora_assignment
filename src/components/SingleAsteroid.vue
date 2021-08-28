@@ -57,7 +57,7 @@ export default {
 			asteroids: use_asteroids,
 			latestAsteroid: use_latestAsteroid
 		} = useAsteroids();
-		
+
 		const asteroid = ref(null);
 
 		if (!props.asteroidId) {
@@ -90,5 +90,18 @@ export default {
 .field {
 	font-size: 1.3rem;
 	font-weight: 600;
+}
+
+@media (max-width: 600px) {
+	.container {
+		margin-top: 30px;
+	}
+
+	.title {
+		font-size: 1.5rem;
+	}
+	.field {
+		font-size: 1rem;
+	}
 }
 </style>

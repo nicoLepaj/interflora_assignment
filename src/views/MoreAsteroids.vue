@@ -1,16 +1,18 @@
 <template>
-	<div>
-		The default list consists of the asteroids that passsed us today and
-		yesterday
-	</div>
-	<div>
-		To select other dates
-		<span
-			><button class="button" @click="toggleCalendarModal(true)">
-				Open The Calendar
-			</button></span
-		>
-		and select up to seven days, past or future!
+	<div class="message">
+		<div>
+			The default list consists of the asteroids that passsed us today and
+			yesterday
+		</div>
+		<div>
+			To select other dates
+			<span
+				><button class="button" @click="toggleCalendarModal(true)">
+					Open The Calendar
+				</button></span
+			>
+			and select up to seven days, past or future!
+		</div>
 	</div>
 
 	<div v-if="!use_isLoading" class="cards-container">
@@ -21,8 +23,6 @@
 			@click="showDetails(asteroid.id)"
 		/>
 	</div>
-
-
 
 	<CalendarModal
 		:modalOpen="calendarModalOpen"
@@ -58,9 +58,9 @@ export default {
 		const router = useRouter();
 		const showDetails = (id) => {
 			router.replace({
-          name: "details",
-          params: { asteroidId: id }
-        });
+				name: 'details',
+				params: { asteroidId: id }
+			});
 		};
 
 		const getMoreAsteroids = (datesRange) => {
