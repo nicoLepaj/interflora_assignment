@@ -1,4 +1,12 @@
 <template>
+	<div id="background">
+		<img src="@/assets/blood-moon.png" alt="moon-background" />
+	</div>
+	<div id="stars-container">
+		<div id="stars" />
+		<div id="stars2" />
+		<div id="stars3" />
+	</div>
 	<div class="main-container">
 		<TheHeader v-if="!initialLoading" />
 		<router-view />
@@ -30,12 +38,12 @@ export default {
 		const todayRange = { start: moment(), end: moment().add(-1, 'days') };
 		const modalOpen = ref(false);
 		const initialLoading = ref(true);
-		
+
 		onMounted(async () => {
 			await use_getAsteroids(todayRange);
 			initialLoading.value = false;
 			setTimeout(() => {
-				modalOpen.value = true;
+				modalOpen.value = false;
 			}, 25000);
 		});
 
@@ -53,7 +61,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-
+@import './components/ui/stars/Stars.css';
 * {
 	box-sizing: border-box;
 }
@@ -61,13 +69,15 @@ export default {
 body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
-	background: url('./assets/red-mooon.jpg') no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	background: #000;
 }
-
+#background img {
+	position: fixed;
+	top: 170px;
+	right: 100px;
+	width: 450px;
+	height: auto;
+}
 .main-container {
 	padding: 5%;
 	color: #d4d4d4;
