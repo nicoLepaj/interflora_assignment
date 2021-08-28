@@ -15,10 +15,6 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-start;
-	position: sticky;
-	top: 20px;
-	background-color: black;
-	z-index: 10;
 }
 
 a {
@@ -35,9 +31,6 @@ a.router-link-active {
 }
 
 @media (max-width: 600px) {
-	.selectors {
-		top: 6px;
-	}
 	.selectors h1 {
 		margin-top: 0;
 	}

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import SingleAsteroid from '../components/SingleAsteroid.vue'
-import useAsteroids from '../composables/asteroids.js';
+import SingleAsteroid from '@/components/SingleAsteroid.vue'
+import useAsteroids from '@/composables/asteroids.js';
 export default {
 	components: {
 		SingleAsteroid

@@ -1,27 +1,24 @@
 <template>
-	<TheHeader />
 	<div class="main-container">
-		<TheNav v-if="!initialLoading" />
+		<TheHeader v-if="!initialLoading" />
 		<router-view />
 	</div>
-	<WelcomeModal :modalOpen="modalOpen" @close="closeModal" :dark="true" />
+	<WelcomeModal :modalOpen="modalOpen" @close="closeModal" />
 	<TheSpinner v-if="use_isLoading" />
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
-import TheNav from './components/ui/TheNav.vue';
-import TheHeader from './components/ui/TheHeader.vue';
-import TheSpinner from './components/ui/TheSpinner.vue';
-import WelcomeModal from './components/modals/WelcomeModal.vue';
-import useAsteroids from './composables/asteroids.js';
+import TheHeader from '@/components/ui/TheHeader.vue';
+import TheSpinner from '@/components/ui/TheSpinner.vue';
+import WelcomeModal from '@/components/modals/WelcomeModal.vue';
+import useAsteroids from '@/composables/asteroids.js';
 import moment from 'moment';
 
 export default {
 	components: {
 		TheHeader,
 		TheSpinner,
-		TheNav,
 		WelcomeModal
 	},
 	setup() {
@@ -31,25 +28,24 @@ export default {
 		} = useAsteroids();
 
 		const todayRange = { start: moment(), end: moment().add(-1, 'days') };
-		const initialLoading = ref(true)
 		const modalOpen = ref(false);
-
+		const initialLoading = ref(true);
+		
 		onMounted(async () => {
 			await use_getAsteroids(todayRange);
 			initialLoading.value = false;
-
 			setTimeout(() => {
-			modalOpen.value = true;
-		}, 25000);
+				modalOpen.value = true;
+			}, 25000);
 		});
-		
+
 		const closeModal = () => (modalOpen.value = false);
 
 		return {
 			use_isLoading,
-			initialLoading,
 			modalOpen,
-			closeModal
+			closeModal,
+			initialLoading
 		};
 	}
 };

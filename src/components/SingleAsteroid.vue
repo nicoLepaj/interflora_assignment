@@ -44,7 +44,7 @@
 
 <script>
 import { ref } from 'vue';
-import useAsteroids from '../composables/asteroids';
+import useAsteroids from '@/composables/asteroids';
 export default {
 	props: {
 		asteroidId: {

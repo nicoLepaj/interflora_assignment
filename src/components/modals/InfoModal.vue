@@ -1,25 +1,5 @@
 <template>
 	<the-modal :open="modalOpen">
-		<!-- <img src="../../assets/planet.svg" />
-		<div class="title">Welcome to the Asteroid Tracker</div>
-		<div class="sub-title">
-			Find out about the latest asteroid to cross our path
-		</div>
-		<div class="sub-title">
-			Or explore more dates in the More Asteroids page
-		</div>
-		<button class="button" @click="$emit('close')">Got it!</button>
-		<div class="extra-info">
-			Image made by
-			<a
-				href="https://www.flaticon.com/authors/smalllikeart"
-				title="smalllikeart"
-				>smalllikeart</a
-			>
-			from
-			<a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-		</div> -->
-
 		<div class="title">
 			{{ $filters.upperCase('asteroid') }}
 			{{ $filters.removeParentheses(asteroid.name) }}
@@ -67,7 +47,7 @@
 </template>
 
 <script>
-import TheModal from '../ui/TheModal.vue';
+import TheModal from '@/components/ui/TheModal.vue';
 export default {
 	components: {
 		TheModal

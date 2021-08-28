@@ -16,7 +16,7 @@
 	</div>
 
 	<div v-if="!use_isLoading" class="cards-container">
-		<AsteroidInfo
+		<AsteroidCard
 			v-for="asteroid in use_asteroids"
 			:asteroid="asteroid"
 			:key="asteroid.id"
@@ -34,13 +34,12 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import AsteroidInfo from '../components/AsteroidInfo.vue';
-import CalendarModal from '../components/modals/CalendarModal.vue';
+import AsteroidCard from '@/components/AsteroidCard.vue';
+import CalendarModal from '@/components/modals/CalendarModal.vue';
 import useAsteroids from '@/composables/asteroids';
 export default {
-	name: 'Home',
 	components: {
-		AsteroidInfo,
+		AsteroidCard,
 		CalendarModal
 	},
 	setup() {
@@ -55,17 +54,17 @@ export default {
 			calendarModalOpen.value = val;
 		};
 
+		const getMoreAsteroids = (datesRange) => {
+			toggleCalendarModal(false);
+			use_getAsteroids(datesRange);
+		};
+
 		const router = useRouter();
 		const showDetails = (id) => {
 			router.replace({
 				name: 'details',
 				params: { asteroidId: id }
 			});
-		};
-
-		const getMoreAsteroids = (datesRange) => {
-			toggleCalendarModal(false);
-			use_getAsteroids(datesRange);
 		};
 
 		return {
@@ -86,6 +85,6 @@ export default {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: start;
-	max-width: 825px;
+	max-width: 1000px;
 }
 </style>

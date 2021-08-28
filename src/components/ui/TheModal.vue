@@ -6,8 +6,8 @@
 		<dialog
 			:class="[
 				'modal',
-				minimal ? 'minimal' : 'classic',
-				dark ? 'dark' : 'light'
+				'dark',
+				minimal ? 'minimal' : 'classic'
 			]"
 			open
 			v-if="open"
@@ -25,11 +25,6 @@ export default {
 			type: Boolean
 		},
 		minimal: {
-			required: false,
-			type: Boolean,
-			default: false
-		},
-		dark: {
 			required: false,
 			type: Boolean,
 			default: false
@@ -70,10 +65,6 @@ export default {
 .minimal {
 	padding: 0;
 	border-radius: 6px;
-}
-
-.light {
-	background-color: #ffffff;
 }
 
 .dark {

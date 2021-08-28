@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import TheModal from '../ui/TheModal.vue';
+import TheModal from '@/components/ui/TheModal.vue';
 export default {
 	components: {
 		TheModal

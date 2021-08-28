@@ -1,5 +1,5 @@
 <template>
-	<the-modal :open="modalOpen" :dark="true" :minimal="true">
+	<the-modal :open="modalOpen" :minimal="true">
 		<div class="container">
 			<DatePicker v-model="range" is-range is-dark color="orange" />
 			<div class="confirm-container">
@@ -11,7 +11,7 @@
 
 <script>
 import { ref, watch } from 'vue';
-import TheModal from '../ui/TheModal.vue';
+import TheModal from '@/components/ui/TheModal.vue';
 import { DatePicker } from 'v-calendar';
 import moment from 'moment';
 
@@ -34,7 +34,6 @@ export default {
 		});
 
     const message = ref('Confirm')
-
     watch(range, () => {
       message.value = 'Confirm'
     })

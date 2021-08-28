@@ -4,7 +4,6 @@ import moment from 'moment';
 
 const state = ref({
 	isLoading: false,
-	objectCount: null,
 	asteroids: [],
 	latest: null
 });
@@ -12,6 +11,7 @@ const state = ref({
 const useAsteroids = () => {
 	const getAsteroids = async (datesRange) => {
 		state.value.isLoading = true;
+		state.value.asteroids = [];
 		let asteroids = [];
 		const startDate = moment(datesRange.start).format('YYYY-MM-DD');
 		const endDate = moment(datesRange.end).format('YYYY-MM-DD');
@@ -24,8 +24,6 @@ const useAsteroids = () => {
 			Object.keys(nearEarth).forEach((key) => {
 				asteroids.push(...nearEarth[key]);
 			});
-
-			state.value.objectCount = state.value.asteroids.length;
 		} catch (error) {
 			state.value.isLoading = false;
 			throw new Error(error.message);
@@ -35,7 +33,6 @@ const useAsteroids = () => {
 	};
 
 	const formatAsteroids = (asteroids) => {
-		state.value.asteroids = [];
 		asteroids.forEach((item) => {
 			const timeStamp =
 				item.close_approach_data[0].epoch_date_close_approach / 1000;
@@ -85,9 +82,6 @@ const useAsteroids = () => {
 
 	return {
 		getAsteroids,
-		objectCount: computed(() => {
-			return state.value.objectCount;
-		}),
 		asteroids: computed(() => {
 			return state.value.asteroids;
 		}),

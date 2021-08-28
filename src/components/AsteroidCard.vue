@@ -12,7 +12,6 @@
 import { computed } from 'vue';
 import moment from 'moment';
 export default {
-	name: 'AsteroidInfo',
 	props: {
 		asteroid: {
 			type: Object,
@@ -34,7 +33,7 @@ export default {
 .card-info {
 	margin: 20px 0;
 	padding: 15px;
-	width: 250px;
+	width: 300px;
 	border: 1px solid #707070;
 	border-radius: 8px;
 	background-color: #a79f8ccc;
@@ -66,8 +65,8 @@ export default {
 		width: 100%;
 		margin: 10px 0;
 	}
-.card-info:first-child {
-	margin-top: 20px;
-}
+	.card-info:first-child {
+		margin-top: 20px;
+	}
 }
 </style>
