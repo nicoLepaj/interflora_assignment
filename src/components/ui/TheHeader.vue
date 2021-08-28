@@ -1,24 +1,25 @@
 <template>
 	<header>
-    <TheNav/>
-  </header>
+		<TheNav />
+	</header>
 </template>
 
 <script>
-import TheNav from '@/components/ui/TheNav.vue'
+import TheNav from '@/components/ui/TheNav.vue';
+
 export default {
-  components: {
-    TheNav
-  }
-}
+	components: {
+		TheNav
+	}
+};
 </script>
 
 <style scoped>
 header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: #151A22;  
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	background-color: #151a22;
 }
 </style>

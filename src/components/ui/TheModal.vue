@@ -44,7 +44,6 @@ export default {
 	z-index: 10;
 	background-color: rgba(0, 0, 0, 0.75);
 }
-
 .modal {
 	position: fixed;
 	top: 50%;
@@ -65,7 +64,6 @@ export default {
 	padding: 0;
 	border-radius: 6px;
 }
-
 .dark {
 	background-color: #1B202A;
 	color: #ffffff;

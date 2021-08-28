@@ -10,7 +10,9 @@
 
 <script>
 import { computed } from 'vue';
+
 import moment from 'moment';
+
 export default {
 	props: {
 		asteroid: {

@@ -33,9 +33,12 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 import AsteroidCard from '@/components/AsteroidCard.vue';
 import CalendarModal from '@/components/modals/CalendarModal.vue';
+
 import useAsteroids from '@/composables/asteroids';
+
 export default {
 	components: {
 		AsteroidCard,
