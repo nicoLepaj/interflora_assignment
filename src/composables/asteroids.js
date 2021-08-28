@@ -6,7 +6,7 @@ const state = ref({
 	isLoading: false,
 	objectCount: null,
 	asteroids: [],
-	latest: null
+	latestId: null
 });
 
 const useAsteroids = () => {
@@ -40,6 +40,7 @@ const useAsteroids = () => {
 			const timeStamp =
 				item.close_approach_data[0].epoch_date_close_approach / 1000;
 			const formattedAsteroid = {
+				id: item.id,
 				name: item.name,
 				hazardStatus: item.is_potentially_hazardous_asteroid
 					? 'hazardous'
@@ -62,7 +63,7 @@ const useAsteroids = () => {
 			state.value.asteroids.push(formattedAsteroid);
 		});
 
-		if (!state.value.latest) {
+		if (!state.value.latestId) {
 			setLatestAsteroid();
 		}
 		state.value.isLoading = false;
@@ -70,16 +71,16 @@ const useAsteroids = () => {
 
 	const setLatestAsteroid = () => {
 		let latestDate = 0;
-		let latestAsteroid;
+		let latestAsteroidId;
 		const now = moment().unix();
 		state.value.asteroids.forEach((item) => {
 			if (item.approachDate > latestDate && item.approachDate < now) {
 				latestDate = item.approachDate;
-				latestAsteroid = item;
+				latestAsteroidId = item.id;
 			}
 		});
 
-		state.value.latest = latestAsteroid;
+		state.value.latestId = latestAsteroidId;
 	};
 
 	return {
@@ -90,8 +91,8 @@ const useAsteroids = () => {
 		asteroids: computed(() => {
 			return state.value.asteroids;
 		}),
-		latestAsteroid: computed(() => {
-			return state.value.latest;
+		latestAsteroidId: computed(() => {
+			return state.value.latestId;
 		}),
 		isLoading: computed(() => {
 			return state.value.isLoading;

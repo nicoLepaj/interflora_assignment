@@ -13,7 +13,7 @@ import { ref, onMounted } from 'vue';
 import TheNav from './components/ui/TheNav.vue';
 import TheHeader from './components/ui/TheHeader.vue';
 import TheSpinner from './components/ui/TheSpinner.vue';
-import WelcomeModal from './components/WelcomeModal.vue';
+import WelcomeModal from './components/modals/WelcomeModal.vue';
 import useAsteroids from './composables/asteroids.js';
 import moment from 'moment';
 
@@ -39,7 +39,7 @@ export default {
 			initialLoading.value = false;
 
 			setTimeout(() => {
-			modalOpen.value = true;
+			modalOpen.value = false;
 		}, 25000);
 		});
 		

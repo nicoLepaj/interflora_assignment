@@ -11,7 +11,7 @@
 
 <script>
 import { ref, watch } from 'vue';
-import TheModal from '../components/ui/TheModal.vue';
+import TheModal from '../ui/TheModal.vue';
 import { DatePicker } from 'v-calendar';
 import moment from 'moment';
 
